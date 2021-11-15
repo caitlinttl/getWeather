@@ -12,8 +12,8 @@ url_ifttt = 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,ifttt_
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=6, minute=10, misfire_grace_time=3600)
-# @sched.scheduled_job('interval', seconds = 5, misfire_grace_time=3600)
+# @sched.scheduled_job('cron', day_of_week='mon-sun', hour=6, minute=10, misfire_grace_time=3600)
+@sched.scheduled_job('interval', seconds = 5, misfire_grace_time=3600)
 def scheduled_job(city='新竹市'):
     # ------ get weather ------
     token = 'CWB-034ACAFB-7E97-43C6-8611-E5B6DF04A68D' 
