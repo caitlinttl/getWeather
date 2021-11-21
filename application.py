@@ -11,13 +11,19 @@ def say_hello(username = "World"):
 
 # some bits of text for the page.
 header_text = '''
-    <html>\n<head> <title>Caitlin Flask Test</title> </head>\n<body>'''
+    <html>\n<head> 
+    <title>Caitlin Flask Test</title> 
+    <link rel="icon" href="/static/img/icon_cat.ico">
+    </head>\n<body>'''
 instructions = '''
+    <p>Welcome to Penguin Cabin.</p>\n
     <p><em>Hint</em>: This is a RESTful web service! Append a username
-    to the URL (for example: <code>/Thelonious</code>) to say hello to
-    someone specific.</p>\n'''
+    to the URL (for example: <code>/yourName</code>) to say hello to
+    someone specific.</p>\n
+    <img src="/static/img/penguin_map_nane.JPG" width="1500">
+    '''
 home_link = '<p><a href="/">Back to Main Page</a></p>\n'
-footer_text = '</body>Just for test.\n</html>'
+footer_text = '</body><br>Just for test.\n</html>'
 # the end of the page
 
 # EB looks for an 'application' callable by default.
