@@ -21,7 +21,7 @@ instructions = '''
     <p><em>Hint</em>: This is a RESTful web service! Append a username
     to the URL (for example: <code>/yourName</code>) to say hello to
     someone specific.</p>\n
-    <img src="/static/img/penguin_map_nane.jpg" width="1500">
+    <img src="/static/img/penguin_map_name.jpg" width="1500">
     '''
 home_link = '<p><a href="/">Back to Main Page</a></p>\n'
 footer_text = '</body><br>Just for test.\n</html>'
