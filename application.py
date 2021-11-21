@@ -6,7 +6,7 @@
 from flask import Flask
 
 # print a nice greeting.
-def say_hello(username = "World"):
+def say_hello(username = ""):
     return '<p>Hello %s!</p>\n' % username
 
 # some bits of text for the page.
@@ -14,13 +14,14 @@ header_text = '''
     <html>\n<head> 
     <title>Caitlin Flask Test</title> 
     <link rel="icon" href="/static/img/icon_cat.ico">
+    <link rel="apple-touch-icon" href="/static/img/icon_cat.ico">
     </head>\n<body>'''
 instructions = '''
     <p>Welcome to Penguin Cabin.</p>\n
     <p><em>Hint</em>: This is a RESTful web service! Append a username
     to the URL (for example: <code>/yourName</code>) to say hello to
     someone specific.</p>\n
-    <img src="/static/img/penguin_map_nane.JPG" width="1500">
+    <img src="/static/img/penguin_map_nane.jpg" width="1500">
     '''
 home_link = '<p><a href="/">Back to Main Page</a></p>\n'
 footer_text = '</body><br>Just for test.\n</html>'
