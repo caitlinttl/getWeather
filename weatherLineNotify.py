@@ -15,8 +15,8 @@ url_ifttt = 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,ifttt_
 
 sched = BlockingScheduler(timezone="Asia/Taipei")
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=6, minute=10, misfire_grace_time=3600)
-# @sched.scheduled_job('interval', seconds = 10, misfire_grace_time=3600)
+# @sched.scheduled_job('cron', day_of_week='mon-sun', hour=6, minute=10, misfire_grace_time=3600)
+@sched.scheduled_job('interval', seconds = 20, misfire_grace_time=3600)
 def scheduled_job(city='新竹市'):
     cst = datetime.timezone(datetime.timedelta(hours=+8))
     # ------ get weather ------
