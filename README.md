@@ -1,7 +1,32 @@
-----------------------------------------------------------
-Created by Caitlin, Hsinchu, Taiwan, 2021.<br>
-For AWS E2C Elastic Beanstalk.
-----------------------------------------------------------
-Penguin Cabin.<br>
-Line notify of the weather and one sentence of everyday.
-----------------------------------------------------------
+
+
+Penguin Cabin and Line Notify
+---
+
+---
+* Line Notify 
+ 
+        Send the weather and one english sentence messages everyday.
+        - IFTTT + BeautifulSoup + Request
+        
+
+* Penguin Cabin 
+ 
+        Introduce the eighteen kinds of penguins in the world.
+        - Python Flask
+
+
+---
+
+Deploy on AWS E2C Elastic Beanstalk and CodePipeline.
+
+Created by `Caitlin`, Hsinchu, Taiwan, 2021.
+
+---
+
+
+
+
+
+
+
