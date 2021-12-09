@@ -8,8 +8,9 @@ from bs4 import BeautifulSoup
 import json
 from apscheduler.schedulers.blocking import BlockingScheduler
 import datetime
+import key
 
-ifttt_key = 'cgcFQMktW46bFG9exR5nta'
+ifttt_key = key.getToken()
 event = 'get_weather'
 url_ifttt = 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,ifttt_key)
 
