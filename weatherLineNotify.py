@@ -11,7 +11,6 @@ import datetime
 import key
 
 ifttt_key = key.getToken()
-print(ifttt_key)
 event = 'get_weather'
 url_ifttt = 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,ifttt_key)
 

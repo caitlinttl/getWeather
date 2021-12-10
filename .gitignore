@@ -1,5 +1,6 @@
 *.pyc
 *py_pyd
+!key.pyc
 
 # Elastic Beanstalk Files
 # .elasticbeanstalk/*
