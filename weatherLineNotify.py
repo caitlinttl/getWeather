@@ -42,7 +42,7 @@ def scheduled_job(city='新竹市'):
     # return (Data.text)
 
 
-     # ------ one sentence ------
+    # ------ one sentence ------
     # get target day (2021/02/07 ~ 2021/5/17)
     today = datetime.date.today()
     delta_day = datetime.timedelta(days=263)
@@ -72,6 +72,41 @@ def scheduled_job(city='新竹市'):
     print(url_ifttt_to_send)
     res = requests.get(url_ifttt_to_send)
     print(res)
+
+    # ------ Penguin News ------
+
+    delta_day_for_news = datetime.timedelta(days=2)
+    day_for_news = (today - delta_day_for_news).strftime('%Y-%m-%d')
+
+    url = ('https://newsapi.org/v2/everything?'
+        'searchIn=title&'
+        'q=企鵝 OR penguin&'
+        'from=' + day_for_news + '&'
+        'sortBy=popularity&'
+        'language=zh&'
+        'apiKey=e52c2eb0afc34923b242e8d7dca2556e')
+
+    penguin_data = requests.get(url)
+    res = json.loads(penguin_data.text,encoding='utf-8')
+
+    news_url = []
+    for article in res['articles']:
+        url = article['url']
+        news_url.append(url)
+
+    print(news_url)
+    if news_url != []:
+        message = f"--Penguin News--<br><br>"
+
+        for news in news_url:
+            message += f"{news}<br><br>"
+        
+        print(message)
+        url_ifttt_to_send = f'{url_ifttt}?value1={message}'
+        print(url_ifttt_to_send)
+        res = requests.get(url_ifttt_to_send)
+        print(res)
+
 
 
 sched.start() 
