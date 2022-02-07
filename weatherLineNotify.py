@@ -45,7 +45,7 @@ def scheduled_job(city='新竹市'):
     # ------ one sentence ------
     # get target day (2021/02/07 ~ 2021/5/17)
     today = datetime.date.today()
-    delta_day = datetime.timedelta(days=263)
+    delta_day = datetime.timedelta(days=365)
     target_day = (today - delta_day).strftime('%Y%m%d')
 
     # get sentence and author
@@ -75,7 +75,7 @@ def scheduled_job(city='新竹市'):
 
     # ------ Penguin News ------
 
-    delta_day_for_news = datetime.timedelta(days=2)
+    delta_day_for_news = datetime.timedelta(days=1)
     day_for_news = (today - delta_day_for_news).strftime('%Y-%m-%d')
 
     url = ('https://newsapi.org/v2/everything?'
