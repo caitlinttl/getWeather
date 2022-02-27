@@ -37,3 +37,4 @@ urllib3==1.26.7
 wcwidth==0.1.9
 Werkzeug==2.0.2
 zipp==3.6.0
+ip2geotools==0.1.6
