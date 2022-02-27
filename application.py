@@ -6,7 +6,9 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
-from ip2geotools.databases.noncommercial import DbIpCity
+import urllib.request
+import json
+# from ip2geotools.databases.noncommercial import DbIpCity
 
 # print a nice greeting.
 def say_hello(username = ""):
@@ -24,7 +26,7 @@ instructions = '''
     <p><em>Hint</em>: This is a RESTful web service! Append a username
     to the URL (for example: <code>/yourName</code>) to say hello to
     someone specific.</p>\n
-    <p><a href="/ip">click to get your ip</a></p>\n
+    <p><a href="/ip/json">click to get your ip</a></p>\n
     <!-- <img src="/static/img/penguin_map_name.jpg" width="1500"> -->
     '''
 home_link = '<p><a href="/">Back to Main Page</a></p>\n'
@@ -44,17 +46,34 @@ application.add_url_rule('/<username>', 'hello', (lambda username:
     header_text + say_hello(username) + home_link + footer_text))
 
 
-@application.route("/ip", methods=["GET"])
-def ip():
-    response = DbIpCity.get(request.remote_addr, api_key='free')
-    return jsonify({
-        'ip': request.remote_addr,
-        'city': response.city,
-        'region': response.region,
-        'country': response.country,
-        'latitude': response.latitude,
-        'longitude': response.longitude,
-        }), 200
+@application.route("/ip/json", methods=["GET"])
+def get_user_ip():
+    user_ip = request.remote_addr
+    ip_api_url = "http://ip-api.com/json/"
+    req = urllib.request.Request(ip_api_url + user_ip)
+    response = urllib.request.urlopen(req).read()
+    json_response = json.loads(response.decode('utf-8'))
+
+    status = json_response['status']
+    if status == "fail":
+        return jsonify({'ip': request.remote_addr}), 200
+    else:
+        return jsonify({
+            'ip': request.remote_addr,
+            'country': json_response['country'],
+            'countryCode': json_response['countryCode'],
+            'region': json_response['region'],
+            'regionName': json_response['regionName'],
+            'city': json_response['city'],
+            'zip': json_response['zip'],
+            'latitude': json_response['lat'],
+            'longitude': json_response['lon'],
+            'timezone': json_response['timezone'],
+            'isp': json_response['isp'],
+            'org': json_response['org'],
+            'as': json_response['as'],
+            'status': json_response['status']
+            }), 200
 
 
 # run the app.
