@@ -6,8 +6,8 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
-import urllib.request
-import json
+# import urllib.request
+# import json
 # from ip2geotools.databases.noncommercial import DbIpCity
 
 # print a nice greeting.
@@ -46,34 +46,34 @@ application.add_url_rule('/<username>', 'hello', (lambda username:
     header_text + say_hello(username) + home_link + footer_text))
 
 
-@application.route("/ip/json", methods=["GET"])
-def get_user_ip():
-    user_ip = request.remote_addr
-    ip_api_url = "http://ip-api.com/json/"
-    req = urllib.request.Request(ip_api_url + user_ip)
-    response = urllib.request.urlopen(req).read()
-    json_response = json.loads(response.decode('utf-8'))
+# @application.route("/ip/json", methods=["GET"])
+# def get_user_ip():
+#     user_ip = request.remote_addr
+#     ip_api_url = "http://ip-api.com/json/"
+#     req = urllib.request.Request(ip_api_url + user_ip)
+#     response = urllib.request.urlopen(req).read()
+#     json_response = json.loads(response.decode('utf-8'))
 
-    status = json_response['status']
-    if status == "fail":
-        return jsonify({'ip': request.remote_addr}), 200
-    else:
-        return jsonify({
-            'ip': request.remote_addr,
-            'country': json_response['country'],
-            'countryCode': json_response['countryCode'],
-            'region': json_response['region'],
-            'regionName': json_response['regionName'],
-            'city': json_response['city'],
-            'zip': json_response['zip'],
-            'latitude': json_response['lat'],
-            'longitude': json_response['lon'],
-            'timezone': json_response['timezone'],
-            'isp': json_response['isp'],
-            'org': json_response['org'],
-            'as': json_response['as'],
-            'status': json_response['status']
-            }), 200
+#     status = json_response['status']
+#     if status == "fail":
+#         return jsonify({'ip': request.remote_addr}), 200
+#     else:
+#         return jsonify({
+#             'ip': request.remote_addr,
+#             'country': json_response['country'],
+#             'countryCode': json_response['countryCode'],
+#             'region': json_response['region'],
+#             'regionName': json_response['regionName'],
+#             'city': json_response['city'],
+#             'zip': json_response['zip'],
+#             'latitude': json_response['lat'],
+#             'longitude': json_response['lon'],
+#             'timezone': json_response['timezone'],
+#             'isp': json_response['isp'],
+#             'org': json_response['org'],
+#             'as': json_response['as'],
+#             'status': json_response['status']
+#             }), 200
 
 
 # run the app.
