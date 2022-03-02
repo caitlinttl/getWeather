@@ -48,7 +48,12 @@ application.add_url_rule('/<username>', 'hello', (lambda username:
 
 @application.route("/ip/json", methods=["GET"])
 def get_user_ip():
-    user_ip = request.remote_addr
+
+    if request.headers.getlist("X-Forwarded-For"):
+        user_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        user_ip = request.remote_addr    
+
     ip_api_url = "http://ip-api.com/json/"
     req = urllib.request.Request(ip_api_url + user_ip)
     response = urllib.request.urlopen(req).read()
@@ -56,10 +61,10 @@ def get_user_ip():
 
     status = json_response['status']
     if status == "fail":
-        return jsonify({'ip': request.remote_addr}), 200
+        return jsonify({'ip': user_ip}), 200
     else:
         return jsonify({
-            'ip': request.remote_addr,
+            'ip': user_ip,
             'country': json_response['country'],
             'countryCode': json_response['countryCode'],
             'region': json_response['region'],
