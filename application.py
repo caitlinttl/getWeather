@@ -50,9 +50,7 @@ application.add_url_rule('/<username>', 'hello', (lambda username:
 def get_user_ip():
 
     if request.headers.getlist("X-Forwarded-For"):
-        print(request.headers.getlist("X-Forwarded-For"))
-        print(request.headers.getlist("X-Forwarded-For")[0])
-        user_ip = request.headers.getlist("X-Forwarded-For")[0]
+        user_ip = request.headers.get("X-Forwarded-For").split(',')[0]
     else:
         user_ip = request.remote_addr    
 
