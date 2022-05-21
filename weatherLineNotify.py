@@ -42,36 +42,36 @@ def scheduled_job(city='新竹市'):
     # return (Data.text)
 
 
-    # ------ one sentence ------
-    # get target day (2021/02/07 ~ 2021/5/17)
-    today = datetime.date.today()
-    delta_day = datetime.timedelta(days=365)
-    target_day = (today - delta_day).strftime('%Y%m%d')
+    # # ------ one sentence ------
+    # # get target day (2021/02/07 ~ 2021/5/17)
+    # today = datetime.date.today()
+    # delta_day = datetime.timedelta(days=365)
+    # target_day = (today - delta_day).strftime('%Y%m%d')
 
-    # get sentence and author
-    url = f"https://tw.feature.appledaily.com/collection/dailyquote/{target_day}"
-    print(url)
+    # # get sentence and author
+    # url = f"https://tw.feature.appledaily.com/collection/dailyquote/{target_day}"
+    # print(url)
 
-    html = requests.get(url)
-    html.encoding="utf-8"
-    sp = BeautifulSoup(html.text,"html.parser")
-    sentence = str(sp.find("p"))
-    author = str(sp.find("h1"))
+    # html = requests.get(url)
+    # html.encoding="utf-8"
+    # sp = BeautifulSoup(html.text,"html.parser")
+    # sentence = str(sp.find("p"))
+    # author = str(sp.find("h1"))
 
-    remove_list = ["<p>", "</p>", "<br/>", "<h1>", "</h1>", "\n", "  "]
-    for remove in remove_list:
-        if remove in sentence:
-            sentence = sentence.replace(remove,"")
-        if remove in author:
-            author = author.replace(remove,"")
-    print(sentence)
-    print(author)
+    # remove_list = ["<p>", "</p>", "<br/>", "<h1>", "</h1>", "\n", "  "]
+    # for remove in remove_list:
+    #     if remove in sentence:
+    #         sentence = sentence.replace(remove,"")
+    #     if remove in author:
+    #         author = author.replace(remove,"")
+    # print(sentence)
+    # print(author)
 
-    message = f"--Today's sentence--<br><br>{sentence}<br><br>{author}<br><br>"
-    url_ifttt_to_send = f'{url_ifttt}?value1={message}'
-    print(url_ifttt_to_send)
-    res = requests.get(url_ifttt_to_send)
-    print(res)
+    # message = f"--Today's sentence--<br><br>{sentence}<br><br>{author}<br><br>"
+    # url_ifttt_to_send = f'{url_ifttt}?value1={message}'
+    # print(url_ifttt_to_send)
+    # res = requests.get(url_ifttt_to_send)
+    # print(res)
 
     # ------ Penguin News ------
 
