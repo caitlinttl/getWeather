@@ -44,7 +44,7 @@ def scheduled_job(city='新竹市'):
 
     # # ------ one sentence ------
     # # get target day (2021/02/07 ~ 2021/5/17)
-    # today = datetime.date.today()
+    today = datetime.date.today()
     # delta_day = datetime.timedelta(days=365)
     # target_day = (today - delta_day).strftime('%Y%m%d')
 
