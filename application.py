@@ -12,7 +12,7 @@ import json
 
 # print a nice greeting.
 def say_hello(username = ""):
-    return '<p>Hello %s!</p>\n' % username
+    return '<p>Hello %s! How are you?</p>\n' % username
 
 # some bits of text for the page.
 header_text = '''
