@@ -8,26 +8,27 @@ from bs4 import BeautifulSoup
 import json
 from apscheduler.schedulers.blocking import BlockingScheduler
 import datetime
-import key
+# import key
 
-ifttt_key = key.getToken()
+# ifttt_key = key.getToken()
+ifttt_key = "cgcFQMktW46bFG9exR5nta"
 event = 'get_weather'
 url_ifttt = 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,ifttt_key)
 
 sched = BlockingScheduler(timezone="Asia/Taipei")
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=6, minute=10, misfire_grace_time=3600)
-# @sched.scheduled_job('interval', seconds = 20, misfire_grace_time=3600)
+# @sched.scheduled_job('interval', seconds = 5, misfire_grace_time=3600)
 def scheduled_job(city='新竹市'):
     cst = datetime.timezone(datetime.timedelta(hours=+8))
     # ------ get weather ------
     token = 'CWB-034ACAFB-7E97-43C6-8611-E5B6DF04A68D' 
     url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=' + token + '&format=JSON&locationName=' + str(city)
     Data = requests.get(url)
-    weather   = (json.loads(Data.text,encoding='utf-8'))['records']['location'][0]['weatherElement'][0]['time'][0]['parameter']['parameterName']
-    rain_rate = (json.loads(Data.text,encoding='utf-8'))['records']['location'][0]['weatherElement'][1]['time'][0]['parameter']['parameterName']
-    min_temp  = (json.loads(Data.text,encoding='utf-8'))['records']['location'][0]['weatherElement'][2]['time'][0]['parameter']['parameterName']
-    max_temp  = (json.loads(Data.text,encoding='utf-8'))['records']['location'][0]['weatherElement'][4]['time'][0]['parameter']['parameterName']
+    weather   = (json.loads(Data.text))['records']['location'][0]['weatherElement'][0]['time'][0]['parameter']['parameterName']
+    rain_rate = (json.loads(Data.text))['records']['location'][0]['weatherElement'][1]['time'][0]['parameter']['parameterName']
+    min_temp  = (json.loads(Data.text))['records']['location'][0]['weatherElement'][2]['time'][0]['parameter']['parameterName']
+    max_temp  = (json.loads(Data.text))['records']['location'][0]['weatherElement'][4]['time'][0]['parameter']['parameterName']
     now_time = datetime.datetime.now(cst).strftime("%Y-%m-%d %H:%M:%S")
     message = f'{now_time}<br>--12小時內天氣預報--<br><br>{weather}<br>氣溫{min_temp}~{max_temp}°C<br>降雨機率{rain_rate}%<br><br>'
     url_ifttt_to_send = f'{url_ifttt}?value1={message}'
@@ -87,7 +88,7 @@ def scheduled_job(city='新竹市'):
         'apiKey=e52c2eb0afc34923b242e8d7dca2556e')
 
     penguin_data = requests.get(url)
-    res = json.loads(penguin_data.text,encoding='utf-8')
+    res = json.loads(penguin_data.text)
 
     news_url = []
     for article in res['articles']:
@@ -116,3 +117,5 @@ sched.start()
 # with open('weather.json', 'w', encoding='utf-8-sig') as file:
 #     file.write(get_city_weather('新竹市'))
 
+# weatherLineNotify: python weatherLineNotify.py
+# weatherLineNotify migrate to linebot project
